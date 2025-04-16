@@ -20,7 +20,7 @@ window.addEventListener('load', function() {
             this.speed = 0;
             this.maxSpeed = 5;
             // this property will be used to show collision boxes
-            this.debug = true;
+            this.debug = false;
 
             this.score = 0;
             this.fontColor = "black";
@@ -34,6 +34,14 @@ window.addEventListener('load', function() {
             this.enemies = [];
             this.enemyTimer = 0;
             this.enemyInterval = 3000;
+
+            // particles
+            this.particles = [];
+
+            // we are setting the initial state here in the main.js file instead of in the player.js file
+            // because we want to make sure that the player is initialized before we set the initial state
+            this.player.currentState = this.player.states[0];
+            this.player.currentState.enter();
         }
         update(deltaTime) {
             this.player.update(this.input.keys, deltaTime);
@@ -52,6 +60,12 @@ window.addEventListener('load', function() {
                 enemy.update(deltaTime);
                 if(enemy.markedForDeletion) this.enemies.splice(this.enemies.indexOf(enemy), 1);
             });
+
+            // update particles
+            this.particles.forEach(particle => {
+                particle.update();
+                if(particle.markedForDeletion) this.particles.splice(this.particles.indexOf(particle), 1);
+            });
         }
         draw(context) {
             this.background.draw(context);
@@ -60,6 +74,11 @@ window.addEventListener('load', function() {
             // draw enemies
             this.enemies.forEach(enemy => {
                 enemy.draw(context);
+            });
+
+            // draw particles
+            this.particles.forEach(particle => {
+                particle.draw(context);
             });
 
             // draw ui
