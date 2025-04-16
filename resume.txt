@@ -1,0 +1,5 @@
+
+- Developed a 2D platformer game using vanilla JavaScript and HTML5 Canvas, implementing 5 distinct player states (sitting, running, jumping, falling, rolling) with smooth transitions
+- Engineered a particle system generating 20+ dust particles per second during player movement, enhancing visual feedback and game feel
+- Implemented collision detection for 3 unique enemy types (flying, ground, climbing) with 100% accuracy in hit detection
+- Optimized game performance to maintain 60 FPS across different screen sizes, handling 50+ simultaneous game objects (enemies, particles, UI elements)

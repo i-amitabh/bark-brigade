@@ -26,9 +26,9 @@ class Enemy {
 
     draw(context) {
         if(this.game.debug) {
-            context.strokeRect(this.x, this.y, this.width * 1.5, this.height * 1.5);
+            context.strokeRect(this.x, this.y, this.width, this.height);
         }
-        context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.x, this.y, this.width * 1.5, this.height * 1.5);
+        context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.x, this.y, this.width, this.height);
     }
 }
 
@@ -63,7 +63,7 @@ export class GroundEnemy extends Enemy {
         this.width = 60;
         this.height = 87;
         this.x = this.game.width;
-        this.y = this.game.height - (this.height * 1.5) - this.game.groundMargin;
+        this.y = this.game.height - this.height - this.game.groundMargin;
         this.image = plant;
         this.speedX = 0;
         this.speedY = 0;
@@ -91,7 +91,7 @@ export class ClimbingEnemy extends Enemy {
         if(this.y > this.game.height - this.height - this.game.groundMargin) {
             this.speedY *= -1;
         }
-        if(this.y < -(this.height * 1.5)) {
+        if(this.y < -(this.height)) {
             this.markedForDeletion = true;
         }
     }
@@ -99,8 +99,8 @@ export class ClimbingEnemy extends Enemy {
     draw(context) {
         super.draw(context);
         context.beginPath();
-        context.moveTo(this.x + (this.width * 1.5) / 2, 0);
-        context.lineTo(this.x + (this.width * 1.5) / 2, this.y + 100);
+        context.moveTo(this.x + (this.width) / 2, 0);
+        context.lineTo(this.x + (this.width) / 2, this.y + 100);
         context.stroke();
     }
 }

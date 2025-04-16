@@ -8,7 +8,7 @@ export class Player {
         this.height = 91.3;
         // position of the player on the canvas (these coordinates are starting from the top left corner of the canvas)
         this.x = 100;
-        this.y = this.game.height - (this.height * 2) - this.game.groundMargin;
+        this.y = this.game.height - this.height - this.game.groundMargin;
         this.image = player;
         
         // speed is the speed of the player in the x-direction
@@ -93,14 +93,14 @@ export class Player {
         // 4th, 5th parameter is the width and height of the image on the sprite sheet
         // 6th, 7th parameter is the position of the image on the canvas
         // 8th, 9th parameter is the width and height of the image on the canvas
-        context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height, this.width, this.height, this.x, this.y, this.width * 2, this.height * 2);
+        context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height, this.width, this.height, this.x, this.y, this.width, this.height);
 
         if (this.game.debug) {
-            context.strokeRect(this.x, this.y, this.width * 2, this.height * 2);
+            context.strokeRect(this.x, this.y, this.width, this.height);
         }
     }
     onGround() {
-        return this.y >= (this.game.height - (this.height * 2) - this.game.groundMargin);
+        return this.y >= (this.game.height - this.height - this.game.groundMargin);
     }
     setState(state, speed) {
         this.currentState = this.states[state];
@@ -109,10 +109,10 @@ export class Player {
     }
     checkCollision() {
         this.game.enemies.forEach(enemy => {
-            if (enemy.x < this.x + (this.width * 2) &&
-                enemy.x + (enemy.width * 1.5) > this.x &&
-                enemy.y < this.y + (this.height * 2) &&
-                enemy.y + (enemy.height * 1.5) > this.y) 
+            if (enemy.x < this.x + this.width &&
+                enemy.x + enemy.width > this.x &&
+                enemy.y < this.y + this.height &&
+                enemy.y + enemy.height > this.y) 
             {
                 enemy.markedForDeletion = true;
                 this.game.score++;
