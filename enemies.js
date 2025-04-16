@@ -25,6 +25,9 @@ class Enemy {
     }   
 
     draw(context) {
+        if(this.game.debug) {
+            context.strokeRect(this.x, this.y, this.width * 1.5, this.height * 1.5);
+        }
         context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height, this.x, this.y, this.width * 1.5, this.height * 1.5);
     }
 }
@@ -88,7 +91,7 @@ export class ClimbingEnemy extends Enemy {
         if(this.y > this.game.height - this.height - this.game.groundMargin) {
             this.speedY *= -1;
         }
-        if(this.y < -this.height) {
+        if(this.y < -(this.height * 1.5)) {
             this.markedForDeletion = true;
         }
     }

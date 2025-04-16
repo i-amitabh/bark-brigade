@@ -37,6 +37,10 @@ export class Player {
         this.currentState.enter();
     }
     update(input, deltaTime) {
+
+        // check collision with enemies
+        this.checkCollision();
+
         // get input from the game class and pass it to the player state class
         this.currentState.handleInput(input);
         
@@ -92,6 +96,10 @@ export class Player {
         // 6th, 7th parameter is the position of the image on the canvas
         // 8th, 9th parameter is the width and height of the image on the canvas
         context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height, this.width, this.height, this.x, this.y, this.width * 2, this.height * 2);
+
+        if (this.game.debug) {
+            context.strokeRect(this.x, this.y, this.width * 2, this.height * 2);
+        }
     }
     onGround() {
         return this.y >= (this.game.height - (this.height * 2) - this.game.groundMargin);
@@ -101,5 +109,18 @@ export class Player {
         this.game.speed = this.game.maxSpeed * speed;
         this.currentState.enter(speed);
     }
-}
+    checkCollision() {
+        this.game.enemies.forEach(enemy => {
+            if (enemy.x < this.x + (this.width * 2) &&
+                enemy.x + (enemy.width * 1.5) > this.x &&
+                enemy.y < this.y + (this.height * 2) &&
+                enemy.y + (enemy.height * 1.5) > this.y) 
+            {
+                enemy.markedForDeletion = true;
+                this.game.score++;
+            } 
+            
+        });
+    }
+}   
 

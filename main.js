@@ -18,9 +18,14 @@ window.addEventListener('load', function() {
             this.groundMargin = 150;
             this.speed = 0;
             this.maxSpeed = 5;
+            // this property will be used to show collision boxes
+            this.debug = true;
+
+            this.score = 0;
+
             this.background = new Background(this);
             this.player = new Player(this); 
-            this.input = new InputHandler();
+            this.input = new InputHandler(this);
 
             // enemies
             this.enemies = [];
