@@ -2,6 +2,7 @@ import { Player } from './player.js';
 import { InputHandler } from './input.js';
 import { Background } from './background.js';
 import { FlyingEnemy, GroundEnemy, ClimbingEnemy } from './enemies.js';
+import { UI } from './UI.js';
 
 window.addEventListener('load', function() {
     const canvas = document.getElementById('canvas1');
@@ -22,10 +23,12 @@ window.addEventListener('load', function() {
             this.debug = true;
 
             this.score = 0;
+            this.fontColor = "black";
 
             this.background = new Background(this);
             this.player = new Player(this); 
             this.input = new InputHandler(this);
+            this.ui = new UI(this);
 
             // enemies
             this.enemies = [];
@@ -58,6 +61,9 @@ window.addEventListener('load', function() {
             this.enemies.forEach(enemy => {
                 enemy.draw(context);
             });
+
+            // draw ui
+            this.ui.draw(context);
         }
         addEnemy() {
             // we will add ground enemy only when things are moving and 50% chance
