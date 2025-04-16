@@ -40,7 +40,7 @@ export class Background {
             new Layer(this.game, this.width, this.height, 0.2, this.layer2image),
             new Layer(this.game, this.width, this.height, 0.4, this.layer3image),
             new Layer(this.game, this.width, this.height, 0.8, this.layer4image),
-            new Layer(this.game, this.width, this.height, 1, this.layer5image)
+            new Layer(this.game, this.width, this.height - 40, 1, this.layer5image)
         ]
     }
 
